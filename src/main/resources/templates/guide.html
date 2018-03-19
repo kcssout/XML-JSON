@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>GUIDE</title>
+
+<style>
+.classname {
+	resize: none
+}
+
+textarea {
+	width: 450px;
+	height: 450px;
+}
+</style>
+</head>
+<body>
+
+<div style="position: fixed; top:3%; left:15%;vertical-align:middle;">
+<center>
+	<!-- buttons -->
+	<table width="1200px">
+		<tr align=center>
+			<td>
+		
+			<H2>XML <=> JSON CONVERT</H2>
+				<br>
+			</td>
+		</tr>
+	</table>
+
+
+
+	<table width="1000px">
+		<tr align=center>
+			<td>
+				<button id="id-xml-to-json" type="button" style="width:450px;"
+					class="btn btn-info btn-block">xml to json</button>
+			</td>
+			<td>　　　　　　　　　　</td>			
+			<td>
+				<button id="id-json-to-xml" type="button" style="width:450px;"
+					class="btn btn-danger btn-block">json to xml</button>
+			</td>
+		</tr>
+	</table>
+
+	<br><br>
+
+	<table width="1200px">
+	<tr align=center>
+
+	<td>
+				<!-- output -->
+
+				<div id="xml-to-json" style="display: none;">
+					<label>
+					<textarea id="input-xml" class="classname"></textarea><BR>
+					<button type="button" class="btn btn-success btn-lg btn-block">XML</button>
+					</label>
+					<button type="button" id="convert-xml-to-json" class="btn btn-default"><b>▶ CONVERT ▶</b></button>
+
+					<label>
+					<textarea id="output-xml-to-json" class="classname"></textarea><BR>
+					<button type="button" class="btn btn-success btn-lg btn-block">JSON</button>
+					</label>
+				</div>
+
+				<div id="json-to-xml" style="display: none;">
+					<label>
+					<textarea id="input-json" class="classname"></textarea>
+					<button type="button" class="btn btn-success btn-lg btn-block">JSON</button>
+					</label>
+					<button type="button" id="convert-json-to-xml" class="btn btn-default"><b>▶ CONVERT ▶</b></button>
+					<label>
+					<textarea id="output-json-to-xml" class="classname"></textarea>
+					<button type="button" class="btn btn-success btn-lg btn-block">XML</button>
+					</label>
+				</div>
+
+	
+	</td>
+
+	</tr>	
+	</table>
+</center>
+</div>
+
+</body>
+
+<script>
+	$("#id-xml-to-json").on("click", function() {
+		$("#output-xml-to-json").empty();
+		$("#xml-to-json").show();
+		$("#json-to-xml").hide();
+	});
+
+	$("#id-json-to-xml").on("click", function() {
+		$("#xml-to-json").hide();
+		$("#output-json-to-xml").empty();
+		$("#json-to-xml").show();
+	});
+
+	var url = "http://localhost:8080/";
+
+	var xml2json = function(_data) {
+
+		$.ajax({
+			type : "POST",
+			url : url + "xml2json",
+			data : _data,
+			contentType : "application/xml",
+			cache : false,
+			success : function(data) {
+				$("#output-xml-to-json").val(JSON.stringify(data, null, 4));
+
+			},
+			error : function() {
+				$("#output-xml-to-json").val("xml2json error");
+			}
+		});
+	}
+
+	var json2xml = function(_data) {
+		var xmlform = "<? xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
+		$.ajax({
+			type : "POST",
+			url : url + "json2xml",
+			data : _data,
+			contentType : "application/json",
+			cache : false,
+			success : function(data) {
+				var xmlText = new XMLSerializer().serializeToString(data);
+				var print = xmlform + xmlText
+				$("#output-json-to-xml").val(print);
+			},
+			error : function() {
+				$("#output-json-to-xml").val("json2xml error");
+			}
+		});
+	}
+
+	$("#convert-xml-to-json").on("click", function() {
+		var data = $("#input-xml").val();
+
+		if (!data) {
+			data = "<data></data>"
+		}
+		xml2json(data);
+	});
+
+	$("#convert-json-to-xml").on("click", function() {
+		var data = $("#input-json").val();
+
+		if (!data) {
+
+			data = "{ a : 1 }"
+		}
+
+		json2xml(data);
+	});
+</script>
+
+</html>
