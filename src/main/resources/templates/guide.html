@@ -19,7 +19,7 @@
 	href="https://cdn.rawgit.com/theus/chart.css/v1.0.0/dist/chart.css" />
 
 <meta charset="UTF-8">
-<title>HTML Layouts</title>
+<title>XML <=> JSON CONVERTER</title>
 <style>
 
 /* UI Object */
@@ -177,9 +177,9 @@ textarea {
 		<!--header -->
 		<div id="header">
 			<button id="id-xml-to-json" type="button" class="btn btn-info"
-				style="width: 250px;">XML TO JSON</button>
+				style="width: 250px;"><b>XML TO JSON</b></button>
 			<button id="id-json-to-xml" type="button" class="btn btn-danger"
-				style="width: 250px;">JSON TO XML</button>
+				style="width: 250px;"><b>JSON TO XML</b></button>
 		</div>
 		<!--//header -->
 		<!--container -->
@@ -204,10 +204,9 @@ textarea {
 			<div id="content">
 				
 				<h2 class="input_name" style="width:90%;">▶INPUT XML
-				<!-- 
-				<button type="button" id="x-sample" class="btn btn-default" style="float:right;"><B>SAMPLE</B></button>
-				 -->
-				
+			
+			<button type="button" id="x-sample" class="btn btn-info" style="float:right;"><B>SAMPLE</B></button>
+			
 				
 				
 				</h2>
@@ -229,14 +228,14 @@ textarea {
 					<div id="con-xml-to-json" style="">
 
 						<button type="button" id="convert-xml-to-json"
-							class="btn btn-default">
+							class="btn btn-info">
 							<b>▶  CONVERT ▶</b>
 						</button>
 					</div>
 
 					<div id="con-json-to-xml" style="display: none;">
 						<button type="button" id="convert-json-to-xml"
-							class="btn btn-default">
+							class="btn btn-danger">
 							<b>▶  CONVERT ▶</b>
 						</button>
 					</div>
@@ -368,14 +367,41 @@ function layerControl(event, index){
 	eventObj.style.top = (position.y + 15) + "px";
 	eventObj.style.display = eventObj.style.display == 'none' ? '':'none';
 }
+
 $("#x-sample").click(function(){
 	var xml_sample = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bookstore>\n\t<book category=\"cooking\">\n"+
 	"\t\t<title lang=\"en\">Everyday Italian</title>\n\t\t<author>Giada De Laurentiis</author>"+
 	"\n\t\t<year>2005</year>\n\t\t<price>30.00</price>\n\t</book>\n</bookstore>";
-
+	
 	$("#input-xml").val(xml_sample);
 	
 });
+$(document).on("click","#x-sample",function(){ 
+	var xml_sample = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bookstore>\n\t<book category=\"cooking\">\n"+
+	"\t\t<title lang=\"en\">Everyday Italian</title>\n\t\t<author>Giada De Laurentiis</author>"+
+	"\n\t\t<year>2005</year>\n\t\t<price>30.00</price>\n\t</book>\n</bookstore>";
+	
+	$("#input-xml").val(xml_sample);
+});
+$(document).on("click","#j-sample",function(){
+
+	
+	var xx="{\n    \"bookstore\": {\n\t\"book\": {\n\t  \"@category\": \"cooking\","+
+	"\n\t \"title\": {\n"+
+	"\t\t \"@lang\": \"en\","+
+	"\n\t\t \"$\": \"Everyday Italian\""+
+	"\n\t },"+
+	"\n\t \"author\": \"Giada De Laurentiis\","+
+	"\n\t \"year\": 2005,"+
+	"\n\t \"price\": 30"+
+	"\n\t}"+
+	"\n    }"+
+	"\n}";
+	           
+	$("#input-json").val(xx);
+	
+});
+
 	var s_cnt = Number(localStorage.getItem('s_cnt'));// xml => json
 	var e_cnt = Number(localStorage.getItem('e_cnt'));
 	var j_to_x_scnt = Number(localStorage.getItem('j_to_x_scnt'));// json=> xml
@@ -526,7 +552,7 @@ $("#x-sample").click(function(){
 
 		
 		$("#x_to_j_count").show();
-		$(".h2 > #x-sample").show();//sample 버튼
+		//$(".h2 > #x-sample").show();//sample 버튼
 		$("#show_st").show();//x_to_j통계
 		$("#show2_st").hide();//j_to_x통계
 		
@@ -535,7 +561,7 @@ $("#x-sample").click(function(){
 		$("#Layer2").css("display", "none");
 		
 		$(".contain_name").text('XML TO JSON');
-		$('.input_name').text('▶INPUT XML');
+		$('.input_name').html('▶INPUT XML <button type="button" id="x-sample" class="btn btn-info" style="float:right;"><B>SAMPLE</B></button>');
 		$(".output_name").text('▶OUTPUT JSON');
 	});
 	//Converter2
@@ -561,7 +587,7 @@ $("#x-sample").click(function(){
 		
 		
 		$('.contain_name').text('JSON TO XML');
-		$('.input_name').text('▶INPUT JSON');
+		$('.input_name').html('▶INPUT JSON <button type="button" id="j-sample" class="btn btn-danger" style="float:right;"><B>SAMPLE</B></button>');
 		$('.output_name').text('▶OUTPUT XML');
 
 	});
