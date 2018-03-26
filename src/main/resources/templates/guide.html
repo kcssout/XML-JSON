@@ -147,7 +147,7 @@ div {
 	background: #e5e5e5
 }
 
-button.img_button {
+button.img_button,button.img_button2 {
 	background: url(/ss.png) no-repeat;
 	border: none;
 	width: 36px;
@@ -197,7 +197,7 @@ textarea {
 				</div>
 				
 				<div id="contain_right2" style="display:none;">
-					<button type="button" class="img_button"
+					<button type="button" class="img_button2"
 					onclick="layerControl(event, 2);"></button>
 				</div>
 			</div>
@@ -360,15 +360,50 @@ function getAbsPos(e){
 	this.y=e.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
 	return this;
 }
+var objbtn;//버튼 생성되는 obj값 저장할 변수
 
+//document를 클릭했을시 (설정버튼이외 페이지 눌렀을시 버튼 자동닫기)
+window.onload = function() {
+
+    document.body.onclick=function(e) {
+    	var eventObj = document.getElementById('Layer1');
+    	var eventObj2 = document.getElementById('Layer2');
+    	var position = getAbsPos(event);
+    	
+    	var x = position.x;
+    	var y = position.y;
+    	
+    	
+    	 // 버튼의 현재 위치
+    	//alert("left: " + obj.left + "px, top: " + obj.top + "px");
+    	if(!(x>=objbtn.left && x<=objbtn.left+35) && !(y>=objbtn.top && x<=objbtn.top+33)){
+  			alert("나옴?");
+    		eventObj.style.display='none';
+    		eventObj2.style.display='none';
+    	}
+
+    	
+    };
+};
+    
 //마우스 레이어 제어(show, hide)
 function layerControl(event, index){
 	var eventObj = document.getElementById('Layer'+index);
 	if(!event)
 		event = window.Event;
 	var position = getAbsPos(event);
-	eventObj.style.left= (position.x - 60) + "px";
-	eventObj.style.top = (position.y + 15) + "px";
+	//alert('left: '+ position.x + 'top: '+position.y);
+	
+	if(index ==1){
+		objbtn = $(".img_button").offset();// 버튼이 현재 그려지는 위치
+	}
+	if(index ==2){
+		objbtn = $(".img_button2").offset();
+	}	
+	//alert("left: " + objbtn.left + "px, top: " + objbtn.top + "px");
+	eventObj.style.left= objbtn.left-40+"px";	//레이어팝업이 그려지는위치
+	eventObj.style.top = objbtn.top+30+"px";
+
 	eventObj.style.display = eventObj.style.display == 'none' ? '':'none';
 }
 
