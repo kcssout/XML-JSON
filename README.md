@@ -1,11 +1,11 @@
-ï»¿# XML-JSON
+# XML-JSON
 XML TO JSON , JSON TO XML , IN SPRING
 
-ì´ë¦„ : ê¹€í˜„íƒœ
+ÀÌ¸§ : ±èÇöÅÂ
 github : https://github.com/kcssout
 
 
-ì˜¤í”ˆì†ŒìŠ¤ëª…: StAXON - JSON via StAX
+¿ÀÇÂ¼Ò½º¸í: StAXON - JSON via StAX
 url: https://github.com/beckchr/staxon
 
 License

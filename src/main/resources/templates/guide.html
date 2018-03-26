@@ -174,7 +174,7 @@ textarea {
 /* //UI Object */
 </style>
 <body>
-
+<BR>
 	<!--ui object -->
 	<div id="wrap">
 		<font size=5>XML <=> JSON CONVERTER</font>
@@ -354,6 +354,7 @@ textarea {
 </body>
 
 <script>
+
 //절대 좌표 구하기(화면 스크롤 반영)
 function getAbsPos(e){
 	this.x=e.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
@@ -377,7 +378,7 @@ window.onload = function() {
     	 // 버튼의 현재 위치
     	//alert("left: " + obj.left + "px, top: " + obj.top + "px");
     	if(!(x>=objbtn.left && x<=objbtn.left+35) && !(y>=objbtn.top && x<=objbtn.top+33)){
-  			alert("나옴?");
+  		
     		eventObj.style.display='none';
     		eventObj2.style.display='none';
     	}
@@ -406,7 +407,20 @@ function layerControl(event, index){
 
 	eventObj.style.display = eventObj.style.display == 'none' ? '':'none';
 }
+var check = true;
+$("#id-xml-to-json").click(function(){
+	$("#id-json-to-xml").removeClass().addClass("btn btn-default");
+	if(check == false){
+		$("#id-xml-to-json").addClass("btn btn-info");
+	}
+	
+});
+$("#id-json-to-xml").click(function(){
+	$("#id-json-to-xml").addClass("btn btn-danger");
+	$("#id-xml-to-json").removeClass().addClass("btn btn-default");
+	check = false;
 
+});
 $("#x-sample").click(function(){
 	var xml_sample = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bookstore>\n\t<book category=\"cooking\">\n"+
 	"\t\t<title lang=\"en\">Everyday Italian</title>\n\t\t<author>Giada De Laurentiis</author>"+
@@ -542,7 +556,7 @@ $(document).on("click","#j-sample",function(){
 		}
 
 		$(".scnt_jx").text("성공 : " + j_to_x_scnt + "건");
-		$(".ecnt_jx").text("성공 : " + j_to_x_ecnt + "건");
+		$(".ecnt_jx").text("실패 : " + j_to_x_ecnt + "건");
 
 		$("#jtox_ss").css('width', ss2);
 		$("#jtox_ss").attr('data-percent', ss2);
@@ -668,8 +682,7 @@ $(document).on("click","#j-sample",function(){
 				$(".r_stat").text(
 						"XML => JSON 성공 : " + s_cnt + " 실패 : " + e_cnt);
 				//$("#output-xml-to-json").css("color","red");
-				$("#output-xml-to-json").val("XML 형식에 맞지 않습니다.").css("color",
-						"red");
+				$("#output-xml-to-json").val("XML 형식에 맞지 않습니다.").css("color","red");
 
 			}
 		});
