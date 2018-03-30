@@ -177,7 +177,7 @@ textarea {
 <BR>
 	<!--ui object -->
 	<div id="wrap">
-		<font size=5>XML <=> JSON CONVERTER</font>
+		<center><font size=5>XML - JSON CONVERTER</font></center>
 		<!--header -->
 		<div id="header">
 			<button id="id-xml-to-json" type="button" class="btn btn-info"
@@ -279,8 +279,7 @@ textarea {
 					<tr height="90px">
 						<td style="vertical-align: top;">
 
-							<button type="button" id="statics" class="btn btn-default">통계
-								펴기▼</button>
+							<button type="button" id="statics" class="btn btn-info">상태 조회 펴기▼</button>
 
 							<div class="charts" style="display: none;">
 
@@ -307,8 +306,7 @@ textarea {
 					<tr height="90px">
 						<td style="vertical-align: top;">
 
-							<button type="button" id="statics2" class="btn btn-default">통계
-								펴기▼</button>
+							<button type="button" id="statics2" class="btn btn-danger">상태 조회 펴기▼</button>
 
 							<div class="charts2" style="display: none;">
 								<span><font size="5" class="scnt_jx"></font></span>
@@ -328,6 +326,9 @@ textarea {
 
 		</div>
 		<!--//footer -->
+		License<BR>
+		StAXON is available under the Apache License, Version 2.0.<BR>
+		(c) 2011, 2012 Odysseus Software
 	</div>
 	<!--//ui object -->
 	
@@ -335,7 +336,7 @@ textarea {
 <table border="0" cellspacing="2" cellpadding="0" width="200">
 <tr><td><button type="button" id="rest_x_to_j_input" class="btn btn-success" style="width:190px; border-radius:0px;">INPUT XML 초기화</button></td></tr>
 <tr><td><button type="button" id="reset_x_to_j_output" class="btn btn-success" style="width:190px; border-radius:0px;">OUTPUT JSON 초기화</button></td></tr>
-<tr><td><button type="button" id="resetbtn" class="btn btn-success" style="border-radius:0px;">XML TO JSON 통계 초기화</button></td></tr>
+<tr><td><button type="button" id="resetbtn" class="btn btn-success" style="border-radius:0px;">XML TO JSON 상태 초기화</button></td></tr>
 
 
 </table>
@@ -345,7 +346,7 @@ textarea {
 <table border="0" cellspacing="1" cellpadding="0" width="200">
 <tr><td><button type="button" id="reset_j_to_x_input" class="btn btn-success" style="width:190px;border-radius:0px;">INPUT JSON 초기화</button></td></tr>
 <tr><td><button type="button" id="reset_j_to_x_output" class="btn btn-success" style="width:190px;border-radius:0px;">OUTPUT XML 초기화</button></td></tr>
-<tr><td><button type="button" id="resetbtn2" class="btn btn-success" style="border-radius:0px;">JSON TO XML 통계 초기화</button></td></tr>
+<tr><td><button type="button" id="resetbtn2" class="btn btn-success" style="border-radius:0px;">JSON TO XML 상태 초기화</button></td></tr>
 
 
 </table>
@@ -511,9 +512,9 @@ $(document).on("click","#j-sample",function(){
 		if ($(".charts").css("display") == "none") {
 			success_xtoj_p();
 			$(".charts").show();
-			$("#statics").text("통계 접기▲");
+			$("#statics").text("상태 조회 접기▲");
 		} else {
-			$("#statics").text("통계 펴기▼");
+			$("#statics").text("상태 조회 펴기▼");
 
 			$(".charts").css("display", "none");
 		}
@@ -582,10 +583,10 @@ $(document).on("click","#j-sample",function(){
 		if ($(".charts2").css("display") == "none") {
 			success_jtox_p();
 			$(".charts2").show();
-			$("#statics2").text("통계 접기▲");
+			$("#statics2").text("상태 조회 접기▲");
 		} else {
 			$(".charts2").css("display", "none");
-			$("#statics2").text("통계 펴기▼");
+			$("#statics2").text("상태 조회 펴기▼");
 		}
 
 	});
